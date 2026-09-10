@@ -1,0 +1,29 @@
+# 依赖
+node_modules/
+**/node_modules/
+
+# 密钥与本地配置（勿提交）
+CLI工具/账号.json
+**/账号.json
+**/*配置.json
+.env
+
+# 下载与构建产物
+CLI工具/下载/
+dist/
+**/dist/
+src-tauri/target/
+**/src-tauri/target/
+*.exe
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 本地运行时
+*.log
+.worktrees/
+local.properties
+**/local.properties

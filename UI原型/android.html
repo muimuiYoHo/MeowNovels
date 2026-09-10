@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>喵小说 · 安卓端原型</title>
+
+<body>
+    <div class="背景层">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+    <div class="舞台">
+        <!-- 搜索 -->
+        <div class="壳">
+            <div class="手机状态栏"><div>22:33</div><div>喵喵喵</div></div>
+            <div class="搜索" data-页面>
+                <div class="搜索区">
+                    <div class="搜索框">
+                        <input type="text" class="输入区"></input>
+                        <div class="清空输入"></div>
+                        <button class="go搜索">?</button>
+                    </div>
+                    <div class="关联面板 删除关联面板"></div>
+                </div>
+                <div class="历史记录区">
+                    <!-- <div class="历史-手柄"></div> -->
+                    <div class="分组" 时间="今天">
+                        <div class="分组框架">
+                            <div class="图标-箭头"><svg height="20px" viewBox="0 -960 960 960" width="24px" fill="#00A1D6"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg></div>
+                            <div class="时间">今天</div>
+                            <div class="分割线"></div>
+                        </div>
+                        <div class="分组内容">
+                            <div class="会话"><div>历史1</div><div>23333333333333333333</div></div>
+                            <div class="会话"><div>历史2</div><div>23333333333333333333</div></div>
+                            <div class="会话"><div>历史3</div><div>23333333333333333333</div></div>
+                            <div class="会话"><div>历史4</div><div>4564564564546546456456</div></div>
+                            <div class="会话"><div>历史5</div><div>4564564564546546456456</div></div> 
+                        </div>   
+                    </div>
+                    <div class="分组 分组-收回" 时间="昨天 | 8.26">
+                        <div class="分组框架">
+                            <div class="图标-箭头"><svg height="20px" viewBox="0 -960 960 960" width="24px" fill="#00A1D6"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg></div>
+                            <div class="时间">昨天 | 8.26</div>
+                            <div class="分割线"></div>
+                        </div>
+                        <div class="分组内容">
+                            <div class="会话"><div>历史6</div><div>23333333333333333333</div></div>
+                            <div class="会话"><div>历史7</div><div>23333333333333333333</div></div>
+                            <div class="会话"><div>历史8</div><div>23333333333333333333</div></div>
+                        </div>
+                    </div>
+                    <div class="分组" 时间="一周前 | 8.19">
+                        <div class="分组框架">
+                            <div class="图标-箭头"><svg height="20px" viewBox="0 -960 960 960" width="24px" fill="#00A1D6"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg></div>
+                            <div class="时间">一周前 | 8.19</div>
+                            <div class="分割线"></div>
+                        </div>
+                        <div class="分组内容">
+                            <div class="会话"><div>历史11</div><div>23333333333333333333</div></div>
+                            <div class="会话"><div>历史12</div><div>23333333333333333333</div></div>
+                            <div class="会话"><div>历史13</div><div>23333333333333333333</div></div>
+                        </div>
+                    </div>
+                    <div class="没更多力">没有更多了喵~</div>
+                </div>
+            </div>
+            <div class="导航栏">
+                <div class="选中">搜索</div>
+                <div>资源</div>
+                <div>设置</div>
+            </div>
+        </div>
+        <!-- 资源 -->
+        <div class="壳">
+            <div class="手机状态栏"><div>22:33</div><div>喵喵喵</div></div>
+            <div class="资源" data-页面>
+            </div>
+            <div class="导航栏">
+                <div>搜索</div>
+                <div class="选中">资源</div>
+                <div>设置</div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+//搜索css
+<style>
+.搜索 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden auto;
+    container-type: size;
+}
+.搜索区 {
+    position: sticky;
+    top: 22px;
+    margin-top: calc(50cqh - 0px);
+    width: 80%;
+    z-index: 2;
+    &::before {
+        content: '今天看点什么喵~';
+        position: absolute;
+        top: calc(-30px + -20px);
+        left: 50%;
+        white-space: nowrap;
+        font-size: 25px;
+        transform: translateX(-50%);
+    }
+    .搜索框 {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+    }
+    .go搜索 {
+        height: 100%;
+        aspect-ratio: 1;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: large;
+        border: none;
+    }
+    .输入区 {
+        width: calc(100% - 17px - 25% - 4px);
+        border: #868686 2px solid;
+        background-color: rgba(255, 255, 255, .5);
+        backdrop-filter: blur(2px);
+        border-radius: 50px;
+        max-height: 10%;
+        height: 40px;
+        transition: all .3s;
+        padding: 0 25% 0 17px;
+        &:focus {
+            border-radius: 3mm;
+            outline: none;
+            border: #00A1D6 2px solid;
+        }
+    }
+    .清空输入 {
+        position: absolute;
+        aspect-ratio: 1;
+        height: 10px;
+        background-color: black;
+    }
+    .关联面板 {
+        width: calc(100% - 4px);
+        height: 300px;
+        max-height: 20vh;
+        margin-top: 20px;
+        border-radius: 3mm;
+        border: #00A1D6 2px solid;
+        background-color: rgba(255, 255, 255, .8);
+        backdrop-filter: blur(5px);
+        transition: all .3s;
+    }
+    .关闭关联面板 {
+        opacity: 0;
+        transform: scale(.8)translateY(20px);
+    }
+    .打开关联面板 {
+        opacity: 1;
+        transform: scale(1)translateY(0);
+    }
+    .删除关联面板 {display: none;}
+}
+.历史记录区 {
+    width: calc(100% - 0px);
+    height: calc(16% - 0px);
+    /* border-top: #86868677 2px solid; */
+    margin-top: auto;
+    display: flex;
+    position: relative;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    /* border-radius: 5mm 5mm 0 0; */
+    padding: 10px 0 0 0;
+    .历史-手柄 {
+        position: absolute;
+        width: 100%;
+        height: 10px;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        /* background-color: #86868646; */
+        &::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background-color: #868686;
+            opacity: .5;
+            border-radius: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    .分组 {
+        width: 80%;
+        display: grid;
+        transition: all .3s;
+        grid-template-rows: auto 1fr;
+        .分组内容 {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-height: 0;
+        }
+    }
+    .分组-收回 {
+        grid-template-rows: auto 0fr;
+        .图标-箭头 {transform: rotate(0deg) !important;}
+    }
+    .分组框架 {
+        width: 100%;
+        display: flex;
+        position: relative;
+        gap: 10px;
+        align-items: center;
+        transition: all .3s;
+        /* background-color: burlywood; */
+        .时间 {
+            font-size: small;
+            color: #00A1D6;
+        }
+        .分割线 {
+            flex: 1 1 0;
+            background-color: #00A1D6;
+            height: 1px;
+        }
+        .图标-箭头 {
+            overflow: hidden;
+            position: absolute;
+            height: 20px;
+            aspect-ratio: 1;
+            top: 0;
+            left: -20px;
+            display: flex;
+            transform: rotate(90deg);
+        }
+
+    }
+    .会话 ,.没更多力 {
+        position: relative;
+        width: 95%;
+        min-height: 50px;
+        font-size: small;
+        display: flex;
+        justify-content: center;
+        color: #868686;
+    }
+    .会话 {
+        flex-direction: column;
+    }
+    .没更多力 {
+        min-height: 100px;
+        padding: 10px 0 0 0;
+    }
+}
+.半隐藏 {opacity: .5;}
+</style>
+//资源css
+<style></style>
+//全局
+<style>
+  * {
+    margin: 0;
+    &::-webkit-scrollbar {display: none;}
+  }
+  body {
+    overflow-y: hidden;
+  }
+.背景层 {
+    position: fixed;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px),linear-gradient(90deg, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-color: #f7f7f7;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    height: 100vh;
+    width: 100vw;
+}
+.orb{
+    position:absolute;
+    aspect-ratio: 1/1;
+    border-radius:50%;
+    background:radial-gradient(circle, #FEEFD0 0%, transparent 70%);
+    pointer-events:none;
+    z-index:0;
+    animation:orbFloat 6s ease-in-out infinite alternate;
+  }
+  .orb-1 {
+    left: 5%;
+    top: 5%;
+    width:200px;
+  }
+  .orb-2 {
+    right: 0;
+    top: 50%;
+    width:300px;
+  }
+  @keyframes orbFloat{
+    0%{transform:translate(0,0) scale(1)}
+    100%{transform:translate(60px,-40px) scale(1.2)}
+  }
+  .舞台 {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: white 2px solid;
+    gap: 40px;
+    padding: 40px;
+    backdrop-filter: blur(1px);
+    .壳 {
+        overflow: hidden;
+        position: relative;
+        width: 300px;
+        aspect-ratio: 9 / 20;
+        border-radius: 7mm;
+        border: black 2px solid;
+        & > div[data-页面] {
+            background-color: white;
+            width: 100%;
+            height: 100%;
+        }
+        .手机状态栏 {
+            width: 86%;
+            position: absolute;
+            padding: 0 7%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 10;
+        }
+    }
+}
+  .导航栏 {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    left: 50%;
+    transform: translateX(-50%);
+    backdrop-filter: blur(2px);
+    bottom: 3%;
+    border: #00a0d690 2px solid;
+    padding: 3px;
+    gap: 1px;
+    border-radius: 50px;
+    z-index: 10;
+    div {
+        position: relative;
+        aspect-ratio: 1.4;
+        border-radius: 50px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        font-size: small;
+        &::after {
+            content: '';
+            position: absolute;
+            height: 12px;
+            aspect-ratio: 1;
+            border: #00A1D6 2px solid;
+            top: 10%;
+            border-radius: 50%;
+            z-index: 2;
+        }
+    }
+    .选中 {
+        color: #00A1D6;
+        &::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            aspect-ratio: 1.4;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            border-radius: 50px;
+            opacity: .3;
+            background-color: #00A1D6;
+            z-index: 1;
+        }
+        &::after {background-color: #00A1D6;}
+    }
+}
+</style>
+//谷歌
+<style>
+    .material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+    @font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 100 700;
+  src: url(font.woff2) format('woff2');
+}
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+</style>
+</html>

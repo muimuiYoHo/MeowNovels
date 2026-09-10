@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "喵小说",
+  "version": "0.1.0",
+  "identifier": "com.muimui.novel",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "喵小说",
+        "width": 860,
+        "height": 620,
+        "minWidth": 768,
+        "minHeight": 432,
+        "transparent": true,
+        "visible": false,
+        "decorations": false,
+        "label": "main",
+        "windowEffects": {
+          "effects": ["acrylic"],
+          "radius": 10.0,
+          "state": "active"
+        },
+        "shadow": true
+      }
+    ],
+    "security": {
+      "csp": null
+    },
+    "withGlobalTauri": true
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "publisher": "缪缪muimui",
+    "icon": ["图标/icon.ico"]
+  }
+}
