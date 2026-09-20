@@ -27,3 +27,5 @@ Thumbs.db
 .worktrees/
 local.properties
 **/local.properties
+.workbuddy/
+**/.workbuddy/

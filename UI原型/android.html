@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>喵小说 · 安卓端原型</title>
+<title>喵小说 · 安卓端 · UI原型</title>
 
 <body>
     <div class="背景层">
@@ -75,17 +75,34 @@
         <!-- 资源 -->
         <div class="壳">
             <div class="手机状态栏"><div>22:33</div><div>喵喵喵</div></div>
-            <div class="资源" data-页面>
-            </div>
             <div class="导航栏">
                 <div>搜索</div>
                 <div class="选中">资源</div>
                 <div>设置</div>
             </div>
+            <div class="资源" data-页面>
+            </div>
+        </div>
+        <!-- 设置 -->
+        <div class="壳">
+            <div class="手机状态栏"><div>22:33</div><div>喵喵喵</div></div>
+            <div class="导航栏">
+                <div>搜索</div>
+                <div>资源</div>
+                <div class="选中">设置</div>
+            </div>
+            <div class="设置" data-页面>
+                <div class="我的分区"></div>
+                <div class="设置分区">
+                    <div class="设置类"></div>
+                    <div class="设置类"></div>
+                    <div class="设置类"></div>
+                    <div class="设置类"></div>
+                    <div class="设置类"></div>
+                </div>
+            </div>
         </div>
     </div>
-
-
 </body>
 
 //搜索css
@@ -273,6 +290,19 @@
 </style>
 //资源css
 <style></style>
+//设置
+<style>
+.设置 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden auto;
+    container-type: size;
+    padding: 0 10% 0;
+    width: 80% !important;
+}
+</style>
 //全局
 <style>
   * {
