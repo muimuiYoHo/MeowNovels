@@ -1,0 +1,14 @@
+{
+  "name": "喵小说服务端",
+  "version": "0.1.0",
+  "description": "喵小说资源服务端：查询/收集/格式处理/入库/更新/分发",
+  "type": "module",
+  "main": "src/主.js",
+  "scripts": {
+    "start": "node src/主.js"
+  },
+  "dependencies": {
+    "iconv-lite": "^0.6.3",
+    "opencc-js": "^1.3.1"
+  }
+}
