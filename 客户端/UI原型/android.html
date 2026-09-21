@@ -1,3 +1,4 @@
+<!-- AI生成 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -18,8 +19,8 @@
                 <div class="搜索区">
                     <div class="搜索框">
                         <input type="text" class="输入区"></input>
-                        <div class="清空输入"></div>
-                        <button class="go搜索">?</button>
+                        <div class="清空输入"><img src="关闭-小.svg" alt=""></div>
+                        <button class="go搜索" aria-label="搜索"></button>
                     </div>
                     <div class="关联面板 删除关联面板"></div>
                 </div>
@@ -67,18 +68,18 @@
                 </div>
             </div>
             <div class="导航栏">
-                <div class="选中">搜索</div>
-                <div>资源</div>
-                <div>设置</div>
+                <div class="选中"><span class="导航图标" style="--图标:url(搜索.svg)"></span><p>搜索</p></div>
+                <div><span class="导航图标" style="--图标:url(小工具.svg)"></span><p>资源</p></div>
+                <div><span class="导航图标" style="--图标:url(背景设定.svg)"></span><p>设置</p></div>
             </div>
         </div>
         <!-- 资源 -->
         <div class="壳">
             <div class="手机状态栏"><div>22:33</div><div>喵喵喵</div></div>
             <div class="导航栏">
-                <div>搜索</div>
-                <div class="选中">资源</div>
-                <div>设置</div>
+                <div><span class="导航图标" style="--图标:url(搜索.svg)"></span><p>搜索</p></div>
+                <div class="选中"><span class="导航图标" style="--图标:url(小工具.svg)"></span><p>资源</p></div>
+                <div><span class="导航图标" style="--图标:url(背景设定.svg)"></span><p>设置</p></div>
             </div>
             <div class="资源" data-页面>
             </div>
@@ -87,18 +88,66 @@
         <div class="壳">
             <div class="手机状态栏"><div>22:33</div><div>喵喵喵</div></div>
             <div class="导航栏">
-                <div>搜索</div>
-                <div>资源</div>
-                <div class="选中">设置</div>
+                <div><span class="导航图标" style="--图标:url(搜索.svg)"></span><p>搜索</p></div>
+                <div><span class="导航图标" style="--图标:url(小工具.svg)"></span><p>资源</p></div>
+                <div class="选中"><span class="导航图标" style="--图标:url(背景设定.svg)"></span><p>设置</p></div>
             </div>
             <div class="设置" data-页面>
-                <div class="我的分区"></div>
+                <div class="我的分区">
+                    <div class="头像">
+                        <img src="1420803610.jpg">
+                        <div class="头像编辑" aria-label="添加照片"></div>
+                    </div>
+                    <div class="昵称 文本">傲娇</div>
+                    <div class="信息 文本">3584527102@qq.com</div>
+                </div>
                 <div class="设置分区">
-                    <div class="设置类"></div>
-                    <div class="设置类"></div>
-                    <div class="设置类"></div>
-                    <div class="设置类"></div>
-                    <div class="设置类"></div>
+                    <div class="设置类" data-细分类型="常规">
+                        <div class="设置项">
+                            <img src="待机_合并_566634345.png">
+                            <div class="项标题">0721</div>
+                        </div>
+                        <div class="设置项">
+                            <img src="クリック待ち_1.png">
+                            <div class="项标题">0721</div>
+                        </div>
+                        <div class="设置项">
+                            <img src="ミニ顔ヒナノ.png">
+                            <div class="项标题">0721</div>
+                        </div>
+                        <div class="设置项">
+                            <img src="u=3431699159,1729412425&fm=253&fmt=auto&app=138&f=PNG.webp">
+                            <div class="项标题">0721</div>
+                        </div>
+                        <div class="设置项">
+                            <img src="Event_BoneAdjustment_Success.png">
+                            <div class="项标题">0721</div>
+                        </div>
+                    </div>
+                    <div class="设置类" data-细分类型="下载">
+                        <div class="设置项">
+                            <img src="待机_合并_566634345.png">
+                            <div class="项标题">0721</div>
+                        </div>
+                        <div class="设置项">
+                            <img src="クリック待ち_1.png">
+                            <div class="项标题">0721</div>
+                        </div>
+                    </div>
+                    <div class="设置类" data-细分类型="帮助">
+                        <div class="设置项">
+                            <img src="待机_合并_566634345.png">
+                            <div class="项标题">0721</div>
+                        </div>
+                        <div class="设置项">
+                            <img src="クリック待ち_1.png">
+                            <div class="项标题">0721</div>
+                        </div>
+                        <div class="设置项">
+                            <img src="ミニ顔ヒナノ.png">
+                            <div class="项标题">0721</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -147,6 +196,17 @@
         align-items: center;
         font-size: large;
         border: none;
+        cursor: pointer;
+        /* mask 外联 SVG，颜色用 background-color 控制（img 方式改不了 fill） */
+        &::after {
+            content: '';
+            width: 70%;
+            height: 70%;
+            background-color: #000; /* 想改颜色只动这一行 */
+            -webkit-mask: url(搜索.svg) center / contain no-repeat;
+            mask: url(搜索.svg) center / contain no-repeat;
+        }
+        &:hover::after { background-color: #00A1D6; }
     }
     .输入区 {
         width: calc(100% - 17px - 25% - 4px);
@@ -167,23 +227,48 @@
     .清空输入 {
         position: absolute;
         aspect-ratio: 1;
-        height: 10px;
-        background-color: black;
+        height: 22px;
+        width: 22px;
+        right: calc(15% + 4px);
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        background-color: transparent;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        color: #868686;
+        font-size: 16px;
+        line-height: 1;
+        z-index: 1;
+        &.显示清空 { display: flex; }
+        &:hover { color: #00A1D6; }
     }
     .关联面板 {
         width: calc(100% - 4px);
-        height: 300px;
+        min-height: 120px;
         max-height: 20vh;
-        margin-top: 20px;
+        margin-top: 10px;
         border-radius: 3mm;
         border: #00A1D6 2px solid;
         background-color: rgba(255, 255, 255, .8);
         backdrop-filter: blur(5px);
         transition: all .3s;
+        overflow-y: auto;
+        box-sizing: border-box;
+        .关联项 {
+            padding: 10px 14px;
+            font-size: .85rem;
+            color: #333;
+            cursor: pointer;
+            &:hover { background-color: rgba(0, 161, 214, .12); color: #00A1D6; }
+        }
     }
     .关闭关联面板 {
         opacity: 0;
         transform: scale(.8)translateY(20px);
+        pointer-events: none;
     }
     .打开关联面板 {
         opacity: 1;
@@ -229,6 +314,7 @@
         display: grid;
         transition: all .3s;
         grid-template-rows: auto 1fr;
+        cursor: pointer;
         .分组内容 {
             display: flex;
             flex-direction: column;
@@ -247,6 +333,8 @@
         gap: 10px;
         align-items: center;
         transition: all .3s;
+        cursor: pointer;
+        user-select: none;
         /* background-color: burlywood; */
         .时间 {
             font-size: small;
@@ -280,6 +368,10 @@
     }
     .会话 {
         flex-direction: column;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background .2s;
+        &:hover { background-color: rgba(0, 161, 214, .08); color: #00A1D6; }
     }
     .没更多力 {
         min-height: 100px;
@@ -289,7 +381,11 @@
 .半隐藏 {opacity: .5;}
 </style>
 //资源css
-<style></style>
+<style>
+    .资源 {
+        background-color: #F1F1F3 !important;
+    }
+</style>
 //设置
 <style>
 .设置 {
@@ -297,10 +393,140 @@
     align-items: center;
     flex-direction: column;
     position: relative;
-    overflow: hidden auto;
-    container-type: size;
-    padding: 0 10% 0;
-    width: 80% !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+    padding: 0 10px 0;
+    gap: 10px;
+    width: calc(100% - 20px) !important;
+    background-color: #F1F1F3 !important;
+    .我的分区 {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        flex-shrink: 0;
+        height: calc(38.2% - 35px);
+        min-height: 120px;
+        margin-top: 35px;
+        width: 100%;
+        box-sizing: border-box;
+        .头像 {
+            width: 38.2%;
+            aspect-ratio: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            > img {
+                width: 100%;
+                aspect-ratio: 1;
+                border-radius: 50%;
+                object-fit: contain;
+                object-position: center;
+            }
+        }
+        .头像编辑 {
+            width: 25%;
+            aspect-ratio: 1;
+            background-color: #00A1D6;
+            position: absolute;
+            bottom: 3px;
+            right: 6px;
+            border: 3px solid #F1F1F3;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            /* mask 外联 SVG；图标颜色 = ::after 的 background-color */
+            &::after {
+                content: '';
+                width: 70%;
+                height: 70%;
+                background-color: #FFFFFF;
+                -webkit-mask: url(添加照片.svg) center / contain no-repeat;
+                mask: url(添加照片.svg) center / contain no-repeat;
+            }
+        }
+        .文本 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .昵称 {
+            font-size: 1.2rem;
+            letter-spacing: .5em;
+            text-indent: 0.5em;/* 整体右移 */
+        }
+        .信息 {
+            font-size: .8rem;
+            color: #868686;
+        }
+    }
+    .设置分区 {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 0 130px;
+        width: 100%;
+        flex-shrink: 0; /* 不压缩 */
+        box-sizing: border-box;
+        &::after {
+            position: absolute;
+            content: 'ui版本: v0.2.1';
+            bottom: 90px;
+            left: 50%;
+            font-size: .8rem;
+            color: #B3B3B3;
+            transform: translateX(-50%);
+        }
+        > div {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+            width: calc(100% - 20px);
+            min-height: 55px;
+            flex-shrink: 0;
+            padding: 35px 10px 10px;
+            border-radius: 12px;
+            background-color: white;
+            &::before {
+                position: absolute;
+                content: attr(data-细分类型);
+                color: #00A1D6;
+                top: 8px;
+                left: 10px;
+                font-size: .8rem;
+            }
+        }
+        .设置项 {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 30px;
+            &::after {
+                position: absolute;
+                content: '';
+                background: url(箭头前进iOS.svg) no-repeat center center / cover;
+                right: 0;
+                top: 50%;
+                height: 50%;
+                aspect-ratio: 1;
+                color: #B3B3B3;
+                transform: translateY(-50%);
+            }
+            img {
+                height: 100%;
+                aspect-ratio: 1;
+                object-fit: contain;
+                object-position: center;
+            }
+        }
+    }
 }
 </style>
 //全局
@@ -395,22 +621,31 @@
         border-radius: 50px;
         height: 35px;
         display: flex;
-        justify-content: center;
-        align-items: end;
-        font-size: small;
-        &::after {
-            content: '';
-            position: absolute;
-            height: 12px;
-            aspect-ratio: 1;
-            border: #00A1D6 2px solid;
-            top: 10%;
-            border-radius: 50%;
-            z-index: 2;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+        cursor: pointer;
+        color: #868686;
+        p {
+            font-size: .8rem;
         }
+    }
+    /* mask 上色：形状来自 --图标，颜色改 background-color */
+    .导航图标 {
+        position: absolute;
+        width: 45%;
+        transition: all .3s;
+        aspect-ratio: 1;
+        top: 50%;
+        transform: translateY(-85%);
+        background-color: #868686; /* 未选中 */
+        -webkit-mask: var(--图标) center / contain no-repeat;
+        mask: var(--图标) center / contain no-repeat;
+        z-index: 2;
     }
     .选中 {
         color: #00A1D6;
+        .导航图标 { background-color: #00A1D6; } /* 选中 */
         &::before {
             content: '';
             position: absolute;
@@ -424,7 +659,6 @@
             background-color: #00A1D6;
             z-index: 1;
         }
-        &::after {background-color: #00A1D6;}
     }
 }
 </style>
@@ -459,4 +693,109 @@
   -webkit-font-smoothing: antialiased;
 }
 </style>
+//搜索
+<script>
+    (() => {
+      const 搜索页 = document.querySelector('.壳 .搜索');
+      if (!搜索页) return;
+
+      const 输入区 = 搜索页.querySelector('.输入区');
+      const 清空 = 搜索页.querySelector('.清空输入');
+      const 关联面板 = 搜索页.querySelector('.关联面板');
+      const go搜索 = 搜索页.querySelector('.go搜索');
+      const 历史记录区 = 搜索页.querySelector('.历史记录区');
+      const 今天分组 = 历史记录区.querySelector('.分组:not(.分组-收回)') || 历史记录区.querySelector('.分组');
+
+      /* 历史分组：点击标题栏展开/收起 */
+      搜索页.querySelectorAll('.分组框架').forEach(框架 => {
+        框架.addEventListener('click', (e) => {
+          e.stopPropagation();
+          框架.closest('.分组').classList.toggle('分组-收回');
+        });
+      });
+
+      /* 点历史会话 → 回填搜索框并打开关联面板 */
+      function 绑定会话(会话) {
+        会话.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const 标题 = 会话.querySelector('div')?.textContent?.trim() || '';
+          输入区.value = 标题;
+          刷新清空按钮();
+          打开关联面板(标题);
+          输入区.focus();
+        });
+      }
+      搜索页.querySelectorAll('.会话').forEach(绑定会话);
+
+      function 刷新清空按钮() {
+        清空.classList.toggle('显示清空', 输入区.value.length > 0);
+      }
+
+      function 打开关联面板(关键词) {
+        关联面板.classList.remove('删除关联面板', '关闭关联面板');
+        关联面板.classList.add('打开关联面板');
+        const 关键 = (关键词 ?? 输入区.value).trim();
+        关联面板.innerHTML = 关键
+          ? `<div class="关联项">搜索「${关键}」</div><div class="关联项">${关键} · 作者</div><div class="关联项">${关键} · 标签</div>`
+          : `<div class="关联项">输入书名或作者喵~</div>`;
+        关联面板.querySelectorAll('.关联项').forEach(项 => {
+          项.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const 文本 = 项.textContent.replace(/^搜索「|」$/g, '');
+            if (项.textContent.startsWith('搜索「')) 执行搜索(文本);
+            else { 输入区.value = 文本.split(' · ')[0]; 刷新清空按钮(); }
+          });
+        });
+      }
+
+      function 关闭关联面板() {
+        if (关联面板.classList.contains('删除关联面板')) return;
+        关联面板.classList.add('关闭关联面板');
+        关联面板.classList.remove('打开关联面板');
+      }
+
+      function 执行搜索(关键词) {
+        const 词 = (关键词 ?? 输入区.value).trim();
+        if (!词) return;
+        关闭关联面板();
+        const 会话 = document.createElement('div');
+        会话.className = '会话';
+        会话.innerHTML = `<div>${词}</div><div>刚刚搜索</div>`;
+        绑定会话(会话);
+        const 内容 = 今天分组.querySelector('.分组内容');
+        今天分组.classList.remove('分组-收回');
+        内容.insertBefore(会话, 内容.firstChild);
+        输入区.blur();
+      }
+
+      输入区.addEventListener('input', () => {
+        刷新清空按钮();
+        if (输入区.value.trim()) 打开关联面板();
+        else 关闭关联面板();
+      });
+      输入区.addEventListener('focus', () => {
+        if (输入区.value.trim()) 打开关联面板();
+      });
+      输入区.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') 执行搜索();
+      });
+
+      清空.addEventListener('click', (e) => {
+        e.stopPropagation();
+        输入区.value = '';
+        刷新清空按钮();
+        关闭关联面板();
+        输入区.focus();
+      });
+
+      go搜索.addEventListener('click', (e) => {
+        e.stopPropagation();
+        执行搜索();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!搜索页.querySelector('.搜索区').contains(e.target)) 关闭关联面板();
+      });
+    })();
+</script>
 </html>
