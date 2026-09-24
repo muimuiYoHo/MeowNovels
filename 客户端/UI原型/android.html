@@ -82,6 +82,10 @@
                 <div><span class="导航图标" style="--图标:url(背景设定.svg)"></span><p>设置</p></div>
             </div>
             <div class="资源" data-页面>
+                <div class="快捷键"></div>
+                <div class="我的收藏" data-卡片类型="我的收藏"></div>
+                <div class="我的下载" data-卡片类型="我的下载"></div>
+                <div class="我的仓库" data-卡片类型="我的仓库"></div>
             </div>
         </div>
         <!-- 设置 -->
@@ -157,9 +161,6 @@
 //搜索css
 <style>
 .搜索 {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     position: relative;
     overflow: hidden auto;
     container-type: size;
@@ -383,20 +384,98 @@
 //资源css
 <style>
     .资源 {
-        background-color: #F1F1F3 !important;
+        background-color: color-mix(in srgb, color-mix(in srgb, white 50%, #F1F1F3) 97%, #00A1D6) !important;
+        padding: 0 12px;
+        overflow: hidden auto;
+        width: calc(100% - 24px) !important;
+        gap: 12px;
+        &::before {
+            position: absolute;
+            content: '';
+            border-radius: 50%;
+            width: 50%;
+            aspect-ratio: 1;
+            background-color: hsl(195 100% 72%);
+            z-index: 0;
+            top: -16px;
+            right: -16px;
+            opacity: .3;
+            filter: blur(50px);
+        }
+        &::after {
+            position: absolute;
+            content: '';
+            border-radius: 50%;
+            width: 100%;
+            aspect-ratio: 1;
+            background-color: hsl(195 100% 72%);
+            z-index: 0;
+            bottom: -10%;
+            left: -35%;
+            opacity: .2;
+            filter: blur(50px);
+        }
+        > div:nth-of-type(2) {
+            min-height: 150px;
+            width: auto;
+            aspect-ratio: 16/9;
+            margin-top: 75px;
+            &::before {color: white;}
+            box-shadow: none;
+        }
+        > div ~ div {
+            position: relative;
+            width: calc(100% - 20px);
+            min-height: 260px;
+            padding: 10px;
+            background-color: color-mix(in srgb, color-mix(in srgb, white 100%, #868686) 50%, transparent);
+            border-radius: 1.5rem;
+            display: flex;
+            box-shadow: #86868620 0 0 8px;
+            z-index: 1;
+            &::before {
+                position: absolute;
+                content: attr(data-卡片类型);
+                font-size: .8rem;
+                font-weight: 600;
+                top: 14px;
+                left: 14px;
+            }
+            &::after {
+                position: absolute;
+                content: '';
+                width: 30px;
+                aspect-ratio: 1;
+                background-color: white;
+                box-shadow: #86868630 0 0 8px;
+                border-radius: .7rem;
+                top: 12px;
+                right: 12px;
+            }
+        }
+        > div:last-child {
+            margin-bottom: 100px;
+        }
+        .快捷键 {
+            position: absolute;
+            top: 30px;
+            width: calc(100% - 20px);
+            height: 35px;
+            border: #00d644 2px solid;
+        }
+        .我的收藏 {
+            /* background: linear-gradient(to top, hsl(from #00A1D6 h s calc(l - 10%)),  color-mix(in srgb, #00A1D6 70% , white 30%) 95%); */
+            background: linear-gradient(to top, #00A1D6, hsl(195 100% 52%) 95%);/*l 42*/
+        }
     }
 </style>
 //设置
 <style>
 .设置 {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     position: relative;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden auto;
     height: 100%;
-    padding: 0 10px 0;
+    padding: 0 12px 0;
     gap: 10px;
     width: calc(100% - 20px) !important;
     background-color: #F1F1F3 !important;
@@ -468,7 +547,7 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
         padding: 0 0 130px;
         width: 100%;
         flex-shrink: 0; /* 不压缩 */
@@ -487,18 +566,18 @@
             flex-direction: column;
             gap: 10px;
             position: relative;
-            width: calc(100% - 20px);
+            width: calc(100% - 24px);
             min-height: 55px;
             flex-shrink: 0;
             padding: 35px 10px 10px;
-            border-radius: 12px;
+            border-radius: 1.5rem;
             background-color: white;
             &::before {
                 position: absolute;
                 content: attr(data-细分类型);
                 color: #00A1D6;
                 top: 8px;
-                left: 10px;
+                left: 12px;
                 font-size: .8rem;
             }
         }
@@ -547,29 +626,6 @@
     height: 100vh;
     width: 100vw;
 }
-.orb{
-    position:absolute;
-    aspect-ratio: 1/1;
-    border-radius:50%;
-    background:radial-gradient(circle, #FEEFD0 0%, transparent 70%);
-    pointer-events:none;
-    z-index:0;
-    animation:orbFloat 6s ease-in-out infinite alternate;
-  }
-  .orb-1 {
-    left: 5%;
-    top: 5%;
-    width:200px;
-  }
-  .orb-2 {
-    right: 0;
-    top: 50%;
-    width:300px;
-  }
-  @keyframes orbFloat{
-    0%{transform:translate(0,0) scale(1)}
-    100%{transform:translate(60px,-40px) scale(1.2)}
-  }
   .舞台 {
     display: flex;
     position: absolute;
@@ -585,12 +641,16 @@
         position: relative;
         width: 300px;
         aspect-ratio: 9 / 20;
-        border-radius: 7mm;
+        border-radius: 1.5rem;
         border: black 2px solid;
         & > div[data-页面] {
+            position: relative;
             background-color: white;
             width: 100%;
             height: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
         }
         .手机状态栏 {
             width: 86%;
@@ -608,9 +668,9 @@
     justify-content: center;
     left: 50%;
     transform: translateX(-50%);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
     bottom: 3%;
-    border: #00a0d690 2px solid;
+    border: #00bfff50 2px solid;
     padding: 3px;
     gap: 1px;
     border-radius: 50px;
@@ -655,8 +715,8 @@
             left: 50%;
             transform: translate(-50%,-50%);
             border-radius: 50px;
-            opacity: .3;
-            background-color: #00A1D6;
+            opacity: .2;
+            background-color: #00bfff;
             z-index: 1;
         }
     }
