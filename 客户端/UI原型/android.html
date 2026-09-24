@@ -384,7 +384,7 @@
 //资源css
 <style>
     .资源 {
-        background-color: color-mix(in srgb, color-mix(in srgb, white 50%, #F1F1F3) 97%, #00A1D6) !important;
+        background-color: color-mix(in srgb, color-mix(in srgb, white 50%, #F5F7F9) 97%, #00A1D6) !important;
         padding: 0 12px;
         overflow: hidden auto;
         width: calc(100% - 24px) !important;
@@ -476,9 +476,9 @@
     overflow: hidden auto;
     height: 100%;
     padding: 0 12px 0;
-    gap: 10px;
+    gap: 35px;/**/
     width: calc(100% - 20px) !important;
-    background-color: #F1F1F3 !important;
+    background-color: #F5F7F9 !important;
     .我的分区 {
         position: relative;
         display: flex;
@@ -547,7 +547,7 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 40px;/*12*/
         padding: 0 0 130px;
         width: 100%;
         flex-shrink: 0; /* 不压缩 */
@@ -563,22 +563,36 @@
         }
         > div {
             display: flex;
+            position: relative;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             position: relative;
             width: calc(100% - 24px);
             min-height: 55px;
             flex-shrink: 0;
-            padding: 35px 10px 10px;
+            padding: 10px 10px 10px;
             border-radius: 1.5rem;
             background-color: white;
             &::before {
                 position: absolute;
                 content: attr(data-细分类型);
-                color: #00A1D6;
-                top: 8px;
-                left: 12px;
+                color: #868686;/**/
+                top: -25px;/*8*/
+                left: 13px;
                 font-size: .8rem;
+            }
+            > div:not(:last-of-type) {
+                &::before {
+                    position: absolute;
+                    content: '';
+                    width: 75%;
+                    height: 1px;
+                    bottom: -8px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background-color: #868686;
+                    opacity: .1;
+                }
             }
         }
         .设置项 {
