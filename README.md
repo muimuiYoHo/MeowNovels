@@ -1,56 +1,56 @@
-# 喵小说
+# MeowNovels（喵小说）
 
-轻小说资源获取与管理：客户端（CLI / GUI）+ 资源服务端。
+轻小说资源获取与管理。仓库路径 **全 ASCII**（`D:\work\MeowNovels`），供 Tauri 安卓编译使用。
 
-## 工作区结构
+## 结构
 
-```
-D:\work\喵小说\
-├── 客户端/
-│   ├── CLI/        # Node 命令行：wenku8 / esjzone 搜索下载，对接服务端
-│   ├── GUI/        # Tauri + Vue 桌面壳（复用旧喵番壳，身份已改喵小说）
-│   └── UI原型/     # PC Fluent + 安卓 Telegram 双端 UI 设计原型
-├── 服务端/
-│   ├── 服务端/     # Node 资源后端（查询 / 收集 / 入库 / 更新 / 分发）
-│   ├── nginx/      # 反向代理配置
-│   ├── 接口文档.md
-│   └── 部署说明.md
-├── README.md
-├── 接口文档.md     # 与 服务端/接口文档.md 同步
-└── 部署说明.md
+```text
+client/
+  cli/        # Node 下载器（wenku8 / esjzone）
+  gui/        # Tauri 桌面 + 安卓壳（平台后缀选择性编译）
+  ui-proto/   # 双端 UI 设计原型（pc.html / android.html）
+server/
+  app/        # 资源服务端 Node
+  nginx/
+  api.md / deploy.md
+docs/         # api.md / deploy.md（与 server 文档同步）
+experiments/  # 液态玻璃等实验（不参与产品构建）
 ```
 
-| 目录 | 角色 | 成熟度 |
-|---|---|---|
-| `客户端/CLI/` | 命令行下载器，已对接服务端三段式 | 生产可用 |
-| `客户端/GUI/` | Tauri 桌面壳，业务页仍为占位 | 骨架 |
-| `客户端/UI原型/` | 双端 UI 设计原型 | 设计完成 |
-| `服务端/` | 轻小说资源后端 + nginx + 冒烟测试 | 源码已入仓 |
+## GUI 平台后缀约定
+
+| 后缀 | 含义 |
+|---|---|
+| `*.win.*` | 仅 Windows/PC |
+| `*.android.*` | 仅 Android |
+| `*.share.*` | 双端同源业务 |
+
+引用写逻辑名，由 `client/gui/vite.config.js` 解析后缀。详见 `client/gui/README.md`。
 
 ## 快速入口
 
-```bash
+```powershell
 # CLI
-cd 客户端/CLI && npm start
+cd client/cli; node src/gui.js
 
-# 桌面客户端（需 Rust / Tauri）
-cd 客户端/GUI && npm install && npm run tauri dev
+# GUI（Windows）
+cd client/gui
+$env:APP_PLATFORM = "win"
+npm.cmd run tauri dev
 
-# UI 原型预览
-cd 客户端/UI原型 && node server.js   # http://localhost:8787
+# GUI（Android 前端预览）
+$env:APP_PLATFORM = "android"
+npm.cmd run dev
 
-# 服务端（本地不 Docker）
-cd 服务端/服务端 && npm install && node src/主.js
-# 完整部署见 服务端/部署说明.md
+# 服务端
+cd server/app; node src/主.js
+
+# UI 原型
+cd client/ui-proto; node server.js
 ```
-
-## 产品边界
-
-- **喵小说（本仓）**：轻小说搜索 / 下载 / 资源库同步 / 桌面 GUI / 资源服务端。
-- **喵番（`D:\work\喵番`）**：独立产品（动漫向历史壳源）。`客户端/GUI` 仅复用其 Tauri 壳，**不是**喵番本体。
 
 ## 注意
 
-- `客户端/CLI/账号.json` 含站点登录信息，已 gitignore，勿提交。
-- 服务端对外经 nginx，路径白名单与限流见 `服务端/部署说明.md`。
-- CLI / 服务端暂无完整自动化测试；服务端有 `测试/冒烟测试.mjs`。
+- **禁止把本仓放回中文路径**（安卓 Gradle/NDK 会挂）。
+- `client/cli/账号.json` 含登录信息，已 gitignore。
+- 安卓 Vue 页在 `App.android.vue` 起新写，对齐 `client/ui-proto/android.html`，不要移植 PC 树。

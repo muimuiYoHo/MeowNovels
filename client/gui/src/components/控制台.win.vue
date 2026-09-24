@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import SetCategory from './设置分类.vue';
-import Basic from './基本设置.vue';
-import Appearance from './外观设置.vue';
+import SetCategory from './设置分类';
+import Basic from './基本设置';
+import Appearance from './外观设置';
 export default {
   components: {
     SetCategory,

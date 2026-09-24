@@ -1,6 +1,6 @@
 <template>
     <div class="标题栏" :class="{ '最大化': 已最大化 }">
-        <logo><img src="../../src-tauri/图标/logo.svg"></logo>
+        <logo><img src="../../src-tauri/icons/icon.png"></logo>
         <Tal>喵小说</Tal>
         <div class="拖拽区域" @dblclick="切换最大化"><slot></slot></div>
         <div class="控件区">
@@ -25,10 +25,10 @@
 <script>
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { invoke } from "@tauri-apps/api/core";
-import Minimize from "./图标/最小化.vue";
-import Maximize from "./图标/最大化.vue";
-import Restore from "./图标/还原窗口大小.vue";
-import Close from "./图标/关闭.vue";
+import Minimize from "./icons/最小化";
+import Maximize from "./icons/最大化";
+import Restore from "./icons/还原窗口大小";
+import Close from "./icons/关闭";
 
 const 窗口 = getCurrentWindow();
 

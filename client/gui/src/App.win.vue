@@ -1,14 +1,14 @@
 <script>
 import { invoke } from "@tauri-apps/api/core";
-import TitleBar from './组件/标题栏.vue';
-import Console from './组件/控制台.vue';
-import Home from './组件/首页.vue';
-import Dashboard from './组件/图标/仪表盘.vue';
-import Schedule from './组件/图标/时间计划.vue';
-import AboutMe from './组件/图标/注意.vue';
-import Star from './组件/图标/收藏.vue';
-import HomeIcon from './组件/图标/首页.vue';
-import Settings from './组件/图标/齿轮.vue';
+import TitleBar from './components/标题栏';
+import Console from './components/控制台';
+import Home from './components/首页';
+import Dashboard from './components/icons/仪表盘';
+import Schedule from './components/icons/时间计划';
+import AboutMe from './components/icons/注意';
+import Star from './components/icons/收藏';
+import HomeIcon from './components/icons/首页';
+import Settings from './components/icons/齿轮';
 let 按键历史 = [];
 
 export default {

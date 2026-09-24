@@ -1,4 +1,4 @@
-#[cfg(target_os = "windows")]
+#[path = "color.rs"]
 mod color;
 
 use std::fs;

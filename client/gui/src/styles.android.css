@@ -1,0 +1,15 @@
+/* Android 设计令牌 — 对齐 UI原型/android，勿与 win 混用 */
+:root {
+  --brand: #00A1D6;
+  --bg: #F5F7F9;
+  --card: #FFFFFF;
+  --text: #12142A;
+  --text-2: #868686;
+}
+* { margin: 0; box-sizing: border-box; }
+html, body, #app { height: 100%; }
+body {
+  font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}

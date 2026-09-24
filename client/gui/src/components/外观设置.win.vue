@@ -1,18 +1,18 @@
 <template>
     <div class="a">
-        <h2>基础</h2>
-        <p>关于软件的基本设置</p>
+        <h2>外观</h2>
+        <p>与应用外观相关的自定义</p>
         <hr>
         <div class="控件区">
-            <XZbuttom v-for="(项, 索引) in 设置列表" :key="项.id" :激活状态="项.值" :按钮文本="项.内容" :可以点击="索引 !== 0" @click="切换状态(索引)"/>
+            <XZbuttom v-for="(项, 索引) in 设置列表" :key="项.id" :激活状态="项.值" :按钮文本="项.内容" :可以点击="true" @click="切换状态(索引)"/>
         </div>
     </div>
 </template>
 
 <script>
-import XZbuttom from './UI/选择按钮.vue';
-import { 发送系统通知 } from '../方法/系统通知.js';
-import { 读取设置, 更新设置 } from '../方法/更新设置.js';
+import XZbuttom from './UI/选择按钮';
+import { 发送系统通知 } from '../methods/系统通知';
+import { 读取设置, 更新设置 } from '../methods/更新设置';
 
 export default {
   components: { XZbuttom },
@@ -21,17 +21,15 @@ export default {
       设置列表: []
     }
   },
-  emits: ['状态变更'],
   async mounted() {
-    this.设置列表 = await 读取设置('基础设置');
+    this.设置列表 = await 读取设置('外观设置');
   },
   methods: {
     async 切换状态(索引) {
       const 项 = this.设置列表[索引];
       const 新状态 = !项.值;
-      this.设置列表 = await 更新设置('基础设置', 项.id, 新状态);
-      this.$emit('状态变更', this.设置列表);
-      发送系统通知('基础设置更新了喵', `${项.内容} -> ${新状态 ? '开启喵' : '关闭喵'}`);
+      this.设置列表 = await 更新设置('外观设置', 项.id, 新状态);
+      发送系统通知('外观设置更新了喵', `${项.内容} -> ${新状态 ? '开启喵' : '关闭喵'}`);
     }
   }
 }
