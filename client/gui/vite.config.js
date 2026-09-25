@@ -28,7 +28,9 @@ function platformResolve() {
       for (const tag of tags) {
         for (const ext of ["", ".vue", ".js", ".mjs", ".ts", ".css"]) {
           const f = `${trimmed}.${tag}${ext}`;
-          if (fs.existsSync(f) && fs.statSync(f).isFile()) return f;
+          // 必须归一成正斜杠：Rollup 以 POSIX 路径作模块 ID，
+          // 返回 Windows 反斜杠路径会让 SFC 的 <style> 子模块对不上，样式被静默丢弃
+          if (fs.existsSync(f) && fs.statSync(f).isFile()) return f.replace(/\\/g, "/");
         }
       }
       return null;
@@ -57,7 +59,9 @@ export default defineConfig(async () => ({
   server: {
     port: 1420,
     strictPort: true,
-    host: host || false,
+    // 默认绑 IPv4 回环：Node 17+ 会把 localhost 解析成 ::1，
+    // 而 Tauri 移动端探测 / adb reverse 走的都是 127.0.0.1，绑错就永远连不上
+    host: host || "127.0.0.1",
     hmr: host
       ? { protocol: "ws", host, port: 1421 }
       : undefined,

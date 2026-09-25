@@ -1,23 +1,25 @@
-# 依赖
+# deps
 node_modules/
 **/node_modules/
 
-# 密钥 / 本地配置
-CLI工具/账号.json
+# secrets / local config
 **/账号.json
 **/*配置.json
 .env
-.gitignore
 
-# 下载 / 构建产物
-CLI工具/下载/
+# build outputs
+**/下载/
 dist/
 **/dist/
 src-tauri/target/
 **/src-tauri/target/
+src-tauri/gen/
+**/src-tauri/gen/
 *.exe
+*.apk
+*.aab
 
-# 编辑器 / 系统 / 与产品无关的中间产物
+# editor / system / runtime
 .vscode/
 .idea/
 .DS_Store
@@ -30,8 +32,10 @@ Thumbs.db
 **/.workbuddy/
 docs/compose/
 **/docs/compose/
-
-# 本地运行时
 *.log
 local.properties
 **/local.properties
+*.pid
+
+# local screenshots
+experiments/phone-screen*

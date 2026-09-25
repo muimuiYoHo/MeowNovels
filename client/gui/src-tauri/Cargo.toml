@@ -1,6 +1,6 @@
 [package]
 name = "miao_novel"
-version = "0.1.0"
+version = "0.5.0"
 description = "喵小说客户端"
 authors = ["缪缪muimui"]
 edition = "2021"
