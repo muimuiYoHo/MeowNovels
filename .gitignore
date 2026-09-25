@@ -39,3 +39,7 @@ local.properties
 
 # local screenshots
 experiments/phone-screen*
+
+# playwright cli debug
+.playwright-cli/
+**/.playwright-cli/
