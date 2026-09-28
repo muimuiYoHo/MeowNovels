@@ -1,6 +1,15 @@
 /* Android 端全局重置
    颜色一律走 styles/颜色管理.android.css，本文件不再定义任何色值 */
 @import "./styles/颜色管理.android.css";
+@import "./styles/吐司.css";
+
+@font-face {
+    font-family: "Huninn";
+    src: url("./资源/字体/Huninn-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 
 * {
     margin: 0;

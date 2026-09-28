@@ -2,6 +2,7 @@
   "name": "喵小说客户端",
   "private": true,
   "version": "0.5.0",
+  "UIversion": "0.6.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

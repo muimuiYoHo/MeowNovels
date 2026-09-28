@@ -1,3 +1,5 @@
+@import "./styles/吐司.css";
+
 :root {
     font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
     font-size: 16px;
@@ -21,6 +23,11 @@
     --错误色-任务: #ff0000;
     --警告色: #FF9800;
     --白: #FFFFFF;
+
+    /* 吐司（轻提示）—— 结构与动画共用 styles/吐司.css，两端只换这三个底色 */
+    --吐司-成功: var(--成功色);
+    --吐司-失败: var(--错误色);
+    --吐司-提示: #333333;
 
     /* 区分色值 */
     --通用背景色-1-亮: hsla(207, 4%, 96%, 0.5);

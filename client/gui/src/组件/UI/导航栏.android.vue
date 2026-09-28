@@ -35,7 +35,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// 贴底悬浮胶囊：位置与观感对齐 UI原型/android.html 的 .导航栏
 .导航栏 {
     position: fixed;
     bottom: calc(env(safe-area-inset-bottom, 0px) + 10px);
@@ -44,15 +43,15 @@ export default {
     display: flex;
     justify-content: center;
     gap: 1px;
-    padding: 3px;
+    padding: 2px 3px;
     border: var(--导航栏-描边) 2px solid;
     border-radius: 50px;
     backdrop-filter: blur(1px);
     z-index: 10;
     > div {
         position: relative;
-        width: 50px;
-        height: 35px;
+        aspect-ratio: 4/3;
+        height: 47px;
         border-radius: 50px;
         display: flex;
         flex-direction: column;
@@ -61,11 +60,24 @@ export default {
         cursor: pointer;
         color: var(--导航栏-未选中);
         -webkit-tap-highlight-color: transparent;
+        &::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            aspect-ratio: 1.4;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)scale(0);
+            border-radius: 0;
+            transition: all .3s;
+            background-color: var(--导航栏-选中背景);
+            z-index: 1;
+        }
         p {
             font-size: .8rem;
         }
     }
-    // mask 上色：形状取自 --图标，颜色由 background-color 决定
+    // mask上色：形状取自--图标 颜色由背景决定
     .导航图标 {
         position: absolute;
         width: 45%;
@@ -84,16 +96,8 @@ export default {
             background-color: var(--导航栏-选中);
         }
         &::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            aspect-ratio: 1.4;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%)scale(1);
             border-radius: 50px;
-            background-color: var(--导航栏-选中背景);
-            z-index: 1;
         }
     }
 }

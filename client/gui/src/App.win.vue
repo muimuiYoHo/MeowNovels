@@ -1,14 +1,14 @@
 <script>
 import { invoke } from "@tauri-apps/api/core";
-import TitleBar from './components/标题栏';
-import Console from './components/控制台';
-import Home from './components/首页';
-import Dashboard from './components/icons/仪表盘';
-import Schedule from './components/icons/时间计划';
-import AboutMe from './components/icons/注意';
-import Star from './components/icons/收藏';
-import HomeIcon from './components/icons/首页';
-import Settings from './components/icons/齿轮';
+import TitleBar from './组件/子页面/标题栏';
+import Console from './组件/子页面/控制台';
+import Home from './组件/页面/首页';
+import Dashboard from './组件/图标/仪表盘';
+import Schedule from './组件/图标/时间计划';
+import AboutMe from './组件/图标/注意';
+import Star from './组件/图标/收藏';
+import HomeIcon from './组件/图标/首页';
+import Settings from './组件/图标/齿轮';
 let 按键历史 = [];
 
 export default {

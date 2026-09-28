@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import XZbuttom from './UI/选择按钮';
-import { 发送系统通知 } from '../methods/系统通知';
-import { 读取设置, 更新设置 } from '../methods/更新设置';
+import XZbuttom from '../UI/选择按钮';
+import { 发送系统通知 } from '../../方法/系统通知';
+import { 读取设置, 更新设置 } from '../../方法/更新设置';
 
 export default {
   components: { XZbuttom },

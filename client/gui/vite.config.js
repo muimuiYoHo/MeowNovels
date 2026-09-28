@@ -55,12 +55,19 @@ export default defineConfig(async () => ({
   define: {
     __APP_PLATFORM__: JSON.stringify(platform),
   },
+  build: {
+    // 关掉清空 dist：本机（WorkBuddy 环境）的 safe-delete 垫片会把 vite 的
+    // emptyDir 转去回收站，累积超过阈值后报 SAFE_DELETE_BULK_CONFIRM_REQUIRED /
+    // "genie-trash failed" 让整个 build 失败。关掉后靠产物哈希天然规避旧文件混淆。
+    emptyOutDir: false,
+  },
   clearScreen: false,
   server: {
     port: 1420,
     strictPort: true,
-    // 默认绑 IPv4 回环：Node 17+ 会把 localhost 解析成 ::1，
-    // 而 Tauri 移动端探测 / adb reverse 走的都是 127.0.0.1，绑错就永远连不上
+    // 真机热更走纯 USB 回环：必须是 127.0.0.1，不能是 localhost（Node 17+ 解析成 IPv6 ::1，
+    // 而 adb reverse 隧道与 Tauri 探测都走 IPv4 → 死等），也不能是 0.0.0.0
+    // （0.0.0.0 会让 Vite 只列出一个局域网 IP，127.0.0.1 上反而没有服务，adb reverse 连不上）。
     host: host || "127.0.0.1",
     hmr: host
       ? { protocol: "ws", host, port: 1421 }

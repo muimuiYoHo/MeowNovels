@@ -1,6 +1,6 @@
 <template>
     <div class="搜索页" @click="处理背景点击">
-        <div class="搜索区" :class="打开关联面板 ? '打开关联面板' : '关闭关联面板'">
+        <div class="搜索区" :class="打开关联面板 ? '打开关联面板' : '关闭关联面板'" data-欢迎语="今天看点什么喵~">
             <div class="搜索框">
                 <input
                     ref="输入区"
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div class="没更多力">没有更多了喵~</div>
+            <div class="没更多力"><!--没有更多了喵~--></div>
         </div>
     </div>
 </template>
@@ -171,7 +171,9 @@ export default {
     box-sizing: border-box;
     padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
     overflow: hidden auto;
-    overscroll-behavior: contain;
+    /* 不用 overscroll-behavior: contain —— 它会连带关掉安卓的原生下拉回弹（果冻效果）。
+       横向翻页已由 App 的 touch 手势接管，不需要靠 contain 阻止滚动链接。 */
+    overscroll-behavior: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -179,19 +181,20 @@ export default {
 }
 .搜索区 {
     position: sticky;
-    top: 12px;
+    top: 35px;
     width: 70%;
     margin-top: 45vh;
     flex-shrink: 0;
     z-index: 2;
     transition: all .3s;
     &::before {
-        content: '今天看点什么喵~';
+        content: attr(data-欢迎语);
         position: absolute;
         top: -50px;
         left: 50%;
         white-space: nowrap;
-        font-size: 25px;
+        font-size: 1.6rem;
+        font-family: "Huninn", system-ui, sans-serif;
         transform: translateX(-50%);
     }
     .搜索框 {
@@ -231,10 +234,10 @@ export default {
         width: calc(100% - 0%);
         box-sizing: border-box;
         border: var(--搜索框-描边) 2px solid;
-        background-color: var(--搜索框-底);
+        background-color: var(--搜索框-背景);
         backdrop-filter: blur(2px);
         border-radius: 50px;
-        height: 40px;
+        height: 50px;
         transition: all .3s;
         padding: 0 25% 0 17px;
         font-size: inherit;
@@ -308,6 +311,9 @@ export default {
     // 必须写连写选择器 &.，写成后代选择器 .打开关联面板 永远匹配不到
     &.打开关联面板 {
         width: 80%;
+        .输入区 {
+            background-color: var(--搜索框-背景-聚焦);
+        }
         .输入区 {
             width: calc(100% - 30%) !important;
         }

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import SetCategory from './设置分类';
+import SetCategory from '../页面/设置分类';
 import Basic from './基本设置';
 import Appearance from './外观设置';
 export default {

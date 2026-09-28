@@ -71,11 +71,34 @@ fn 读取文件(路径: String) -> Result<String, String> {
     fs::read_to_string(&路径).map_err(|e| e.to_string())
 }
 
+// 与安卓端同签名。**不存在算成功** ——「删掉不存在的东西」本身就是目标状态。
+#[tauri::command]
+fn 删除文件(路径: String) -> Result<(), String> {
+    match fs::remove_file(&路径) {
+        Ok(()) => Ok(()),
+        Err(错误) if 错误.kind() == std::io::ErrorKind::NotFound => Ok(()),
+        Err(错误) => Err(错误.to_string()),
+    }
+}
+
 #[tauri::command]
 fn 获取应用目录() -> Result<String, String> {
     let exe路径 = std::env::current_exe().map_err(|e| e.to_string())?;
     let exe目录 = exe路径.parent().ok_or("无法获取exe目录")?;
     Ok(exe目录.to_string_lossy().to_string())
+}
+
+// 私有空间根目录 —— PC 端逻辑**先空着**（2026-09-26 决定）。
+//
+// 前端 私有存储.share.js 在 PC 上会拿到这个错误：读操作按约定回退到默认值
+// （不会崩），写操作抛错、由调用方感知。等 PC 端要做时，在这里填上
+//   app.path().app_local_data_dir()  →  %LOCALAPPDATA%\com.muimui.meownovels
+// 再 create_dir_all 一下即可。
+// ⚠️ 别用 获取应用目录（exe 所在目录）：发布版装进 Program Files 后那里不可写，
+// 开发时 exe 在 target/debug 下虽然能写，但 cargo clean 一跑数据就没了。
+#[tauri::command]
+fn 私有空间根目录() -> Result<String, String> {
+    Err("PC 端私有空间尚未实现".to_string())
 }
 
 #[tauri::command]
@@ -166,7 +189,9 @@ pub fn 打开窗口() {
             检查文件是否存在,
             写入文件,
             读取文件,
+            删除文件,
             获取应用目录,
+            私有空间根目录,
             获取系统主题色,
             获取所有颜色,
             选择文件或文件夹,

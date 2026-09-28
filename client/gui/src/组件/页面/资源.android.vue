@@ -3,16 +3,19 @@
         <div class="快捷键"></div>
         <div v-for="卡片 in 卡片列表" :key="卡片.类型" :data-卡片类型="卡片.类型" @click="$emit('打开子页', 卡片.类型)">
             <div class="卡片内容">{{ 卡片.空态 }}</div>
+            <div class="进入卡片空间" :style='{ "--图标": `url("${图标表.进入卡片空间}")` }'></div>
         </div>
     </div>
 </template>
 
 <script>
+import 图标表 from '../../资源/页面图标';
 export default {
     name: "资源Android",
     emits: ["打开子页"],
     data() {
         return {
+            图标表,
             // 骨架占位：三张卡对应原型「我的收藏 / 我的下载 / 我的仓库」，列表内容待设计
             卡片列表: [
                 { 类型: "我的收藏", 渐变卡面: true, 空态: "还没有收藏喵~" },
@@ -32,7 +35,8 @@ export default {
     width: 100%;
     padding: 0 15px calc(100px + env(safe-area-inset-bottom, 0px));
     overflow: hidden auto;
-    overscroll-behavior: contain;
+    /* 不用 overscroll-behavior: contain —— 它会连带关掉安卓的原生下拉回弹（果冻效果） */
+    overscroll-behavior: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -75,12 +79,12 @@ export default {
         position: relative;
         box-sizing: border-box;
         width: calc(100% - 0px);
-        min-height: 260px;
+        min-height: 160px;
         padding: 10px;
         border-radius: 1.5rem;
         display: flex;
         flex-shrink: 0;
-        background-color: var(--卡片-底);
+        background-color: var(--卡片-一般背景);
         box-shadow: var(--卡片-阴影) 0 0 8px;
         z-index: 1;
         cursor: pointer;
@@ -89,15 +93,14 @@ export default {
             position: absolute;
             content: attr(data-卡片类型);
             font-size: .8rem;
-            font-weight: 600;
+            font-weight: 800;
             color: var(--卡片-标题);
             top: 14px;
             left: 14px;
         }
         // 右上角操作位
-        &::after {
+        .进入卡片空间 {
             position: absolute;
-            content: '';
             width: 30px;
             aspect-ratio: 1;
             background-color: var(--卡片-操作位底);
@@ -105,6 +108,18 @@ export default {
             border-radius: .7rem;
             top: 12px;
             right: 12px;
+            &::before {
+                position: absolute;
+                content: '';
+                width: 70%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                aspect-ratio: 1;
+                background-color: var(--黑);
+                -webkit-mask: var(--图标) center / contain no-repeat;
+                mask: var(--图标) center / contain no-repeat;
+            }
         }
         &:active {
             transform: scale(.995);
