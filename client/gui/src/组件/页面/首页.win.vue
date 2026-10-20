@@ -34,7 +34,6 @@ export default {
     display: flex;
     position: relative;
     flex-direction: column;
-    // flex-wrap: wrap;
     width: calc(100% - 1rem);
     padding: 1rem;
     gap: .5rem;

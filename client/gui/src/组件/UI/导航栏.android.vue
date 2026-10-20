@@ -1,11 +1,6 @@
 <template>
     <div class="导航栏">
-        <div
-            v-for="项 in 导航项"
-            :key="项.名称"
-            :class="{ 选中: 项.索引 === 当前 }"
-            @click="$emit('切换', 项.索引)"
-        >
+        <div v-for="项 in 导航项" :key="项.名称" :class="{ 选中: 项.索引 === 当前 }" @click="$emit('切换', 项.索引)">
             <span class="导航图标" :style='{ "--图标": `url("${项.图标}")` }'></span>
             <p>{{ 项.名称 }}</p>
         </div>
@@ -18,7 +13,7 @@ import 图标表 from '../../资源/页面图标';
 export default {
     name: "导航栏Android",
     props: {
-        // 当前页索引，与 App 的页序一致（0 搜索 / 1 资源 / 2 设置）
+        // 当前页索引 与 App 的页序一致 0 搜索 1 资源 2 设置
         当前: { type: Number, default: 0 },
     },
     emits: ["切换"],
@@ -46,18 +41,18 @@ export default {
     padding: 2px 3px;
     border: var(--导航栏-描边) 2px solid;
     border-radius: 50px;
-    backdrop-filter: blur(1px);
     z-index: 10;
+    backdrop-filter: blur(2px);
     > div {
         position: relative;
         aspect-ratio: 4/3;
-        height: 47px;
+        height: 3rem;
         border-radius: 50px;
         display: flex;
         flex-direction: column;
         justify-content: end;
         align-items: center;
-        cursor: pointer;
+        font-weight: 600;
         color: var(--导航栏-未选中);
         -webkit-tap-highlight-color: transparent;
         &::before {
@@ -71,19 +66,20 @@ export default {
             border-radius: 0;
             transition: all .3s;
             background-color: var(--导航栏-选中背景);
-            z-index: 1;
+            z-index: 0;
         }
         p {
             font-size: .8rem;
+            z-index: 1;
         }
     }
-    // mask上色：形状取自--图标 颜色由背景决定
+    // mask 上色 形状取自图标变量 颜色由背景决定
     .导航图标 {
         position: absolute;
         width: 45%;
         aspect-ratio: 1;
         top: 50%;
-        transform: translateY(-85%);
+        transform: translateY(-75%);
         background-color: var(--导航栏-未选中);
         -webkit-mask: var(--图标) center / contain no-repeat;
         mask: var(--图标) center / contain no-repeat;
@@ -96,7 +92,7 @@ export default {
             background-color: var(--导航栏-选中);
         }
         &::before {
-            transform: translate(-50%, -50%)scale(1);
+            transform: translate(-50%, -50%)scale(1.05);
             border-radius: 50px;
         }
     }

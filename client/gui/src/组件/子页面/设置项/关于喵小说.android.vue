@@ -44,8 +44,8 @@ export default {
             应用版本: 初始信息('基本信息', '软件版本'),
             UI版本: 初始信息('基本信息', 'UI版本'),
             上次检查时间: 初始信息('状态', '上次检查时间'),
-            // 浏览器信息是**同步**的，直接在 data 里取就够了 —— 不必绕进 mounted 的 Promise.all。
-            // 「内核主版本」只给主版本号（143）；要完整串（143.0.7499.192）换成「内核版本」。
+            // 浏览器信息是同步的 直接在 data 里取就够 不必绕进 mounted 的 Promise.all
+            // 内核主版本只给主版本号 要完整串就换成 内核版本
             内核版本: 读取浏览器信息('内核主版本'),
             浏览器: 读取浏览器信息('内核'),
         };
@@ -88,7 +88,7 @@ export default {
         width: 100%;
         gap: 15px;
         font-family: "Huninn", system-ui, sans-serif;
-        padding: max(30px, calc(env(safe-area-inset-top, 10px) + 3.5rem)) 0 max(15px, calc(env(safe-area-inset-bottom, 10px) + 5px));
+        padding: max(30px, calc(env(safe-area-inset-top, 10px) + 3rem + 15px)) 0 max(15px, env(safe-area-inset-bottom, 0) * 1.5);
         > * {
             flex-shrink: 0;
         }
@@ -98,7 +98,7 @@ export default {
             align-items: center;
             justify-content: space-between;
             flex-direction: column;
-            height: calc(38.2vh - max(30px, calc(env(safe-area-inset-top, 10px) + 3.5rem)));
+            height: calc(38.2vh - max(30px, calc(env(safe-area-inset-top, 10px) + 3rem + 15px)));
             width: 100%;
             > * {flex-grow: 1;}
             > div:nth-of-type(2) {

@@ -71,7 +71,6 @@ export default {
 .slide-down-enter-active,
 .slide-down-leave-active {
     position: absolute;
-    // inset: 0;
     transition: all .25s ease;
 }
 .slide-up-enter-from,

@@ -11,15 +11,15 @@ import 图标表 from '../../资源/页面图标';
 export default {
     name: "标题栏Android",
     props: {
-        // 标题文字 留空只显示返回按钮（极简栏）
+        // 标题文字 留空只显示返回按钮
         标题: { type: String, default: "" },
-        // 是否显示返回按钮   有标题但退不出去的场景可以关掉。
+        // 是否显示返回按钮 有标题但退不出去的场景可以关掉
         显示返回: { type: Boolean, default: true },
     },
     emits: ["返回"],
     data() {
         return {
-            图标表, // 必须放进 data，模板才能取到 script 里的 import
+            图标表, // 必须放进 data 模板才能取到 script 里的 import
         };
     },
 };
@@ -27,11 +27,6 @@ export default {
 
 <style lang="scss" scoped>
 .标题栏 {
-    /* 垂直位置由**这里**管：贴住状态栏下沿。
-       页面容器（.子页 / .子页面）不要再加 padding-top —— 现在各子页是在
-       .内容区 上用 `padding-top: max(30px, env(safe-area-inset-top) + 3.5rem)`
-       给这一条让位的（3.5rem ≈ 52px 栏高 + 一点间距）。
-       这条不能省：漏了它标题栏会落到 y=0、被状态栏的时间和信号图标压住。 */
     position: absolute;
     top: env(safe-area-inset-top, 0px);
     z-index: 25;
@@ -39,7 +34,7 @@ export default {
     align-items: center;
     gap: 10px;
     flex: 0 0 auto;
-    height: 52px;
+    height: 3rem;
     padding-right: 20px;
     > * {
         background-color: var(--标题栏元素-背景);

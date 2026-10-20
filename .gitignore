@@ -38,6 +38,9 @@ local.properties
 **/local.properties
 *.pid
 
+# 本地开发缓存
+tools/
+
 # local screenshots
 experiments/phone-screen*
 

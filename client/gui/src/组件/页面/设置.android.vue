@@ -40,15 +40,25 @@ export default {
             设置类列表: [
                 {
                     名称: "常规",
-                    项列表: [{ 标题: "账号", "可以点击": true }, { 标题: "应用个性化", "可以点击": false }, { 标题: "语言", "可以点击": false }, { 标题: "源管理", "可以点击": false }],
+                    项列表: [{ 标题: "账号", "可以点击": true },
+                    { 标题: "应用个性化", "可以点击": false },
+                    { 标题: "语言", "可以点击": false },
+                    { 标题: "书源", "可以点击": true }],
                 },
                 {
                     名称: "下载",
-                    项列表: [{ 标题: "资源目录", "可以点击": false }, { 标题: "数据与储存", "可以点击": false }],
+                    项列表: [{ 标题: "资源目录", "可以点击": true },
+                    { 标题: "数据与储存", "可以点击": false }],
+                },
+                {
+                    名称: "网络",
+                    项列表: [{ 标题: "Cookie", "可以点击": true },
+                    { 标题: "流量使用情况", "可以点击": true }],
                 },
                 {
                     名称: "帮助",
-                    项列表: [{ 标题: "关于喵小说", "可以点击": true }, { 标题: "问题反馈", "可以点击": false }],
+                    项列表: [{ 标题: "关于喵小说", "可以点击": true },
+                    { 标题: "问题反馈", "可以点击": false }],
                 },
             ],
             ui版本: `v${包信息.UIversion}`,
@@ -193,7 +203,7 @@ export default {
             min-height: 30px;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
-            // mask 上色，颜色由 --设置项-箭头 控制
+            // mask 上色 颜色由箭头色变量控制
             &::after {
                 position: absolute;
                 content: '';
@@ -207,7 +217,7 @@ export default {
                 -webkit-mask: var(--图标-箭头) center / contain no-repeat;
                 mask: var(--图标-箭头) center / contain no-repeat;
             }
-            // 图标位占位：真实图标待定
+            // 图标位占位 真实图标待定
             .项图标 {
                 height: 100%;
                 aspect-ratio: 1;

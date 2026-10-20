@@ -16,7 +16,7 @@ export default {
     data() {
         return {
             图标表,
-            // 骨架占位：三张卡对应原型「我的收藏 / 我的下载 / 我的仓库」，列表内容待设计
+            // 骨架占位 三张卡对应原型 我的收藏 我的下载 我的仓库 列表内容待设计
             卡片列表: [
                 { 类型: "我的收藏", 渐变卡面: true, 空态: "还没有收藏喵~" },
                 { 类型: "我的下载", 渐变卡面: false, 空态: "暂无下载任务" },
@@ -35,7 +35,7 @@ export default {
     width: 100%;
     padding: 0 15px calc(100px + env(safe-area-inset-bottom, 0px));
     overflow: hidden auto;
-    /* 不用 overscroll-behavior: contain —— 它会连带关掉安卓的原生下拉回弹（果冻效果） */
+    /* 不用 overscroll-behavior contain 会连带关掉安卓原生下拉回弹 */
     overscroll-behavior: auto;
     display: flex;
     flex-direction: column;
@@ -66,7 +66,7 @@ export default {
         opacity: .2;
         filter: blur(50px);
     }
-    > div:first-child {    // 快捷键条 原型为待设计的占位框，先留虚线占位
+    > div:first-child {    // 快捷键条 原型为待设计的占位框 先留虚线占位
         margin-top: 45px;
         width: calc(100% - 20px);
         min-height: 40px;

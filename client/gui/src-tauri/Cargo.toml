@@ -30,6 +30,21 @@ tauri-plugin-opener = "2"
 tauri-plugin-dialog = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+# ── 原生网络层（书源系统的「发起网络请求」）─────────────────────────────
+# 为什么必须有它：WebView 里 fetch 外站会被 CORS 拦（实测 `Failed to fetch`），
+# 而书源要抓的是任意第三方站点，不可能让它们都配 CORS 头。
+#
+# · `rustls-tls`：安卓上**不能**用 native-tls（它走 OpenSSL，交叉编译地狱）。
+# · `cookies`：reqwest 自带的 cookie jar，按域名隔离，登录态靠它。
+# · 不开 `json` feature（我们只用 serde_json 手动拼，省一份依赖）。
+reqwest = { version = "0.12", default-features = false, features = [
+    "rustls-tls",
+    "cookies",
+    "gzip",
+    "brotli",
+] }
+# 原始字节要跨 IPC 回前端，base64 是唯一无损且不炸 JSON 的载体。
+base64 = "0.22"
 tauri-plugin-fs = "2"
 tauri-plugin-notification = "2"
 sysinfo = "0.30"

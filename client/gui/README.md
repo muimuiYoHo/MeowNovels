@@ -5,21 +5,7 @@
 ## 目录
 
 ```text
-src/
-  main.win.js | main.android.js     # 入口（Vite 按 APP_PLATFORM 选）
-  App.win.vue | App.android.vue     # 根组件（安卓整树重写，不迁 PC）
-  styles.win.css | styles.android.css
-  methods/
-    更新设置.share.js               # 业务（双端同源，禁止复制两份）
-    系统通知.win.js | 系统通知.android.js
-  components/
-    *.win.vue                       # PC 页（现壳）
-    UI/选择按钮.share.vue
-    icons/*.share.vue               # 纯图标
-src-tauri/src/
-  lib.rs                            # 仅 cfg 路由
-  platform.win.rs | platform.android.rs
-  color.rs                          # 仅 win 引用
+下次一定
 ```
 
 ## 约定

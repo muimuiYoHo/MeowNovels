@@ -30,7 +30,6 @@ export default {
       任务项.classList.add('激活任务');
       this.$emit('选择分类', 被点击任务);
       console.log(`点击 ${被点击任务} 任务`);
-      // 记录日志(info, '任务', `n点击了 ${被点击任务}`);
     }
   }
 };

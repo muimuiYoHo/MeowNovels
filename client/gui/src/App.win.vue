@@ -20,7 +20,6 @@ export default {
     Star,
     HomeIcon,
     Settings,
-    // Home,
     TitleBar
   },
   data() {
@@ -52,7 +51,7 @@ export default {
   async mounted() {
     window.addEventListener('keydown', this.处理键盘事件);
 
-    // 获取系统主题色并转HSL
+    // 取系统主题色并转 HSL
     try {
       const hex = await invoke('获取系统主题色');
       if (hex) {
@@ -122,7 +121,6 @@ export default {
     > div {
         position: relative;
         transition: all .3s;
-        // background-color: var(--透明背景);
     }
 }
 .侧边栏开关 {
@@ -153,7 +151,6 @@ export default {
     align-items: start;
     gap: .8rem;
     transition: all .3s;
-    // overflow: hidden;
     div[当前位置] {.icon {color: var(--主题色);}}
     > div {
         display: flex;
@@ -179,7 +176,6 @@ export default {
     max-width: calc(100% - 3rem);
     height: calc(100% - 3px);
     overflow: hidden;
-    // overflow-y: auto;
     border-radius: 10px;
     border: var(--边框色-淡) 1.5px solid;
 }
@@ -202,7 +198,6 @@ export default {
         }
         /* 轨道 */
         &::-webkit-scrollbar-track {
-            // background: var(--边框色-淡);
             background: transparent;
             border-radius: 0px;
         }

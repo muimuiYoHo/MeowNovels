@@ -35,6 +35,29 @@ fn 删除文件(路径: String) -> Result<(), String> {
     }
 }
 
+// 列出某个目录下的**文件名**（换行分隔）。目录不存在 / 不是目录 → 空串（不报错，
+// 和「删除不存在算成功」同一套态度：调用方不该为「首次运行还没这个目录」写 try）。
+//
+// 为什么返回的是**文件名**而不是完整路径：调用方（存储层）本来就只认
+// 「子目录 + 文件名」这套，给它完整路径它还得再拆一次。
+// 为什么换行分隔：文件名不含换行 —— 不必为此套一层 JSON。
+// 只列文件不列子目录（目前用途是扫 源/ 下的 .js，没有嵌目录的场景）。
+#[tauri::command]
+fn 列出目录(路径: String) -> Result<String, String> {
+    let 目录 = std::path::Path::new(&路径);
+    if !目录.is_dir() {
+        return Ok(String::new());
+    }
+    let mut 名单: Vec<String> = std::fs::read_dir(目录)
+        .map_err(|e| e.to_string())?
+        .filter_map(|项| 项.ok())
+        .filter(|项| 项.path().is_file())
+        .filter_map(|项| 项.file_name().into_string().ok())
+        .collect();
+    名单.sort();
+    Ok(名单.join("\n"))
+}
+
 #[tauri::command]
 fn 获取应用目录() -> Result<String, String> {
     let dir = std::env::current_exe()
@@ -142,7 +165,7 @@ fn 开放文件根(app: &tauri::AppHandle) -> Result<std::path::PathBuf, String>
 /// 初始化应用存储（**幂等**，每次启动都可以调）。
 ///
 /// 1. 把编译期嵌入的「初始数据」释放进私有 files/
-/// 2. 在开放 files/ 下建好 `数据/下载`、`数据/用户资源`
+/// 2. 在开放 files/ 下建好 `数据/下载`、`数据/导出`、`数据/用户资源`
 ///
 /// 判据是**顶层目录是否存在**，而不是逐个文件判断：
 ///   · `私有/数据` 已存在 → 整棵「数据」跳过
@@ -178,10 +201,10 @@ fn 初始化应用存储(app: tauri::AppHandle) -> Result<serde_json::Value, Str
         std::fs::create_dir_all(私有根.join(相对)).map_err(|e| e.to_string())?;
     }
 
-    // ── 开放空间：建好下载 / 用户资源 ──
+    // ── 开放空间：建好下载 / 导出 / 用户资源 ──
     let 开放根 = 开放文件根(&app)?;
     let mut 已建目录 = Vec::new();
-    for 相对 in ["数据/下载", "数据/用户资源"] {
+    for 相对 in ["数据/下载", "数据/导出", "数据/用户资源"] {
         let 目标 = 开放根.join(相对);
         std::fs::create_dir_all(&目标).map_err(|e| format!("无法创建开放目录：{e}"))?;
         已建目录.push(目标.to_string_lossy().to_string());
@@ -220,6 +243,13 @@ async fn 打开调试窗口(_app: tauri::AppHandle) -> Result<(), String> {
     Ok(())
 }
 
+// 书源系统的「发起网络请求」—— 实现在跨平台共用的 `net.rs`。
+// 这里只挂一个薄命令，**不要**把请求逻辑写进来：两端语义必须逐字一致。
+#[tauri::command]
+async fn 网络请求(选项: serde_json::Value) -> Result<serde_json::Value, String> {
+    crate::net::发请求(选项).await
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn 打开窗口() {
     tauri::Builder::default()
@@ -232,6 +262,7 @@ pub fn 打开窗口() {
             写入文件,
             读取文件,
             删除文件,
+            列出目录,
             获取应用目录,
             私有空间根目录,
             初始化应用存储,
@@ -239,7 +270,8 @@ pub fn 打开窗口() {
             获取系统主题色,
             获取所有颜色,
             选择文件或文件夹,
-            打开调试窗口
+            打开调试窗口,
+            网络请求
         ])
         .run(tauri::generate_context!())
         .expect("Android 端启动失败");

@@ -81,6 +81,24 @@ fn 删除文件(路径: String) -> Result<(), String> {
     }
 }
 
+// 与安卓端同签名。目录不存在 / 不是目录 → 空串（不报错，同「删除不存在算成功」）。
+// 只列文件不列子目录；返回文件名、换行分隔（文件名不含换行，不必套 JSON）。
+#[tauri::command]
+fn 列出目录(路径: String) -> Result<String, String> {
+    let 目录 = std::path::Path::new(&路径);
+    if !目录.is_dir() {
+        return Ok(String::new());
+    }
+    let mut 名单: Vec<String> = fs::read_dir(目录)
+        .map_err(|e| e.to_string())?
+        .filter_map(|项| 项.ok())
+        .filter(|项| 项.path().is_file())
+        .filter_map(|项| 项.file_name().into_string().ok())
+        .collect();
+    名单.sort();
+    Ok(名单.join("\n"))
+}
+
 #[tauri::command]
 fn 获取应用目录() -> Result<String, String> {
     let exe路径 = std::env::current_exe().map_err(|e| e.to_string())?;
@@ -178,6 +196,14 @@ async fn 打开调试窗口(_app: tauri::AppHandle) -> Result<(), String> {
     Ok(())
 }
 
+// 书源系统的「发起网络请求」—— 实现在跨平台共用的 `net.rs`。
+// 两端共用同一份实现是刻意的：请求语义（重定向 / cookie / 头键大小写）
+// 必须逐字一致，否则会出现「同一个源 PC 能跑、安卓不行」这种极难查的 bug。
+#[tauri::command]
+async fn 网络请求(选项: serde_json::Value) -> Result<serde_json::Value, String> {
+    crate::net::发请求(选项).await
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn 打开窗口() {
     tauri::Builder::default()
@@ -190,13 +216,15 @@ pub fn 打开窗口() {
             写入文件,
             读取文件,
             删除文件,
+            列出目录,
             获取应用目录,
             私有空间根目录,
             获取系统主题色,
             获取所有颜色,
             选择文件或文件夹,
             打开调试窗口,
-            设置暗色模式
+            设置暗色模式,
+            网络请求
         ])
         .setup(|应用| {
             if let Some(窗口) = 应用.get_webview_window("main") {
