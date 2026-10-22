@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>信息登记喵 · 学生信息登记台</title>
+<!-- <link rel="stylesheet" href="样式表/主样式.css"> -->
+<link rel="stylesheet" href="1.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="logo">
+    <span>Mui</span>
+    <span>信息登记表</span>
+    <div class="顶栏图标">
+      <button class="图标钮" type="button" aria-label="帮助">?</button>
+      <button class="图标钮 格" type="button" aria-label="Mui 应用"></button>
+      <span class="头像" title="喵可">喵</span>
+    </div>
+  </div>
+  <nav class="电梯">
+    <a class="当前" href="#数据" style="--位置强调: rgb(0, 166, 255);"><img alt="">数据展示</a>
+    <a class="" href="#表单" style="--位置强调: rgb(0, 166, 255);"><img alt="">信息登记</a>
+    <a class="" href="#操作" style="--位置强调: rgb(0, 166, 255);"><img alt="">表单操作</a>
+  </nav>
+  <div class="页脚">
+    <a href="#">隐私</a>
+    <a href="#">条款</a>
+    <a href="#">帮助</a>
+    <div class="版权">© 2024 信息登记喵</div>
+  </div>
+</header>
+
+<div>
+  <section class="数据区" id="数据">
+    <div class="标题栏">
+      <div>
+        <h2>数据区</h2>
+        <p>姓名 / 年龄 / 专业 / 联系电话 / 备注</p>
+      </div>
+      <span id="数据量">0 条</span>
+    </div>
+<div class="类型">
+      <span>当前记录 <b id="factTotal">0</b> 条</span>
+      <span>专业数 <b id="factMajors">0</b> 个</span>
+      <span>平均年龄 <b id="factAge">0</b> 岁</span>
+      <span>最后更新 <b id="factStamp">—</b></span>
+    </div>
+    <div class="表格功能">
+      <div class="搜索">
+        <span>⌕</span>
+        <input id="q" type="search" placeholder="搜索姓名、专业、电话或备注…" autocomplete="off">
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="仅备注">
+        <span class="track"></span>
+        仅看有备注
+      </label>
+    </div>
+
+    <div class="表格">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:44px"><input class="cbox" type="checkbox" id="pickAll" aria-label="全选"></th>
+            <th>姓名</th>
+            <th style="width:80px">年龄</th>
+            <th style="width:190px">专业</th>
+            <th style="width:150px">联系电话</th>
+            <th>备注</th>
+            <th style="width:120px"></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="分片"></div>
+
+    <div class="底功能">
+      <span>—</span>
+      <span></span>
+      <button>重置筛选</button>
+    </div>
+  </section>
+</div>
+<div class="表单页">
+    <div class="关闭"></div>
+      <!-- 信息表单区 -->
+  <section id="表单">
+    <div class="标题栏">
+      <div>
+        <h2 id="formTitle">信息表单区</h2>
+        <p id="formSub">填好下面的字段，保存后即可加入名单</p>
+      </div>
+    </div>
+
+    <form novalidate>
+      <div class="项目">
+        <label for="fName">姓名 <span class="req">*</span></label>
+        <input id="fName" name="name" placeholder="例如：喵" autocomplete="name">
+        <span>请填写姓名喵</span>
+      </div>
+      <div class="项目">
+        <label for="fAge">年龄 <span class="req">*</span></label>
+        <input id="fAge" name="age" type="number" min="1" max="120" placeholder="例如：2333" inputmode="numeric">
+        <span><18</span>
+      </div>
+      <div class="项目">
+        <label for="fMajor">专业 <span class="req">*</span></label>
+        <select id="fMajor" name="major">
+          <option value="">请选择专业</option>
+        </select>
+        <span>请选择专业</span>
+      </div>
+      <div class="项目">
+        <label for="fTel">联系电话 <span class="req">*</span></label>
+        <input id="fTel" name="tel" type="tel" placeholder="11 位手机号" inputmode="numeric" maxlength="11">
+        <span>请填写 11 位手机号</span>
+      </div>
+      <div class="项目 文本">
+        <label for="fNote">备注</label>
+        <textarea id="fNote" name="note" placeholder="可填写班级、特殊情况等（选填）"></textarea>
+        <span>最多 60 字</span>
+      </div>
+    </form>
+  </section>
+
+  <!-- 表单操作区 -->
+  <section class="操作" id="操作">
+    <div class="">
+      <div>
+        <h2>表单操作区</h2>
+        <p>保存、修改、清空、批量处理与导出</p>
+      </div>
+    </div>
+    <div class="" style="margin-bottom:4px">
+      <button type="button">保存登记</button>
+      <button type="button" disabled>取消修改</button>
+      <button type="button">清空表单</button>
+      <span style="flex:1"></span>
+      <button type="button" disabled>删除所选 (0)</button>
+      <button type="button">导出 CSV</button>
+    </div>
+  </section>
+</div>
+<div class="返回上面"></div>
+<div class="删除">
+  <div role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+    <h3>确认删除？</h3>
+    <p>删除后无法恢复喵。</p>
+    <div class="row">
+      <button class="btn text" id="dlgCancel" type="button">取消</button>
+      <button class="btn filled" id="dlgOk" type="button" style="background:var(--red)">删除</button>
+    </div>
+  </div>
+</div>
+<style>
+  body {
+    display: flex;
+    position: relative;
+    gap: 6vw;
+    padding: 0 0 0 ;
+    background-color: var(--页面底色, #F0F4F9);
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+ul, li, div, a {
+    list-style: none;
+    line-height: normal;
+    text-decoration: none;
+}
+html, body {
+    height: 100vh;
+    width: 100vw;
+    min-width: 1280px;
+    min-height: 720px;
+    overflow: hidden;
+}
+</style>
+<script src="数据.js"></script>
+<script src="出入库.js"></script>
+</body>
+</html>
